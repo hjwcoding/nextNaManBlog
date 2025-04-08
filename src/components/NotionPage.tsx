@@ -19,7 +19,10 @@ const NotionPage: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       console.log("📣 fetch from API route 시작");
+      console.log(process.env)
+      console.log(process.env.NEXT_PUBLIC_DATABASE_ID);
       const res = await fetch("/api/notion");
+      console.log(res);
       const json = await res.json();
       console.log("📦 받아온 데이터:", json);
       setData(json.results || []);
