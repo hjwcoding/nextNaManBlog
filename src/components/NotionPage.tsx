@@ -19,37 +19,45 @@ const NotionPage: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       console.log("📣 fetch from API route 시작");
-      console.log(process.env)
-      console.log(process.env.NEXT_PUBLIC_DATABASE_ID);
       const res = await fetch("/api/notion");
-      console.log(res);
       const json = await res.json();
       console.log("📦 받아온 데이터:", json);
       setData(json.results || []);
     };
-
     fetchData();
   }, []);
 
   return (
-    <div>
+    <div className="p-4">
       <h2 className="text-xl font-bold mb-4">Featured</h2>
-      <ul>
-        {data.map((item) => {
-          const title = item.properties.이름.title[0]?.text.content || "제목 없음";
-          const date = item.properties.생성일.date.start;
-          const url = item.url;
+      {data.length === 0 ? (
+        <p className="text-gray-500">데이터가 없습니다.</p>
+      ) : (
+        <ul>
+          {data.map((item) => {
+            const title = item.properties?.이름?.title?.[0]?.text?.content || "제목 없음";
+            const date = item.properties?.생성일?.date?.start || "";
+            const url = item.url;
 
-          return (
-            <li key={item.id} className="mb-2 flex justify-between items-center">
-              <a href={url} target="_blank" rel="noopener noreferrer" className="hover:underline">
-                {title}
-              </a>
-              <span className="text-sm text-gray-500">{date}</span>
-            </li>
-          );
-        })}
-      </ul>
+            return (
+              <li
+                key={item.id}
+                className="mb-2 flex justify-between items-center border-b border-gray-100 pb-1"
+              >
+                <a
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:underline"
+                >
+                  {title}
+                </a>
+                <span className="text-sm text-gray-500">{date}</span>
+              </li>
+            );
+          })}
+        </ul>
+      )}
     </div>
   );
 };
