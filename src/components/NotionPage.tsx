@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 
 type NotionPageType = {
   id: string;
-  url: string;
   properties: {
-    이름: {
+    Title: {
       title: { text: { content: string } }[];
     };
-    생성일: {
+    Date: {
       date: { start: string };
+    };
+    Link: {
+      rich_text: {plain_text: string}[];
     };
   };
 };
@@ -35,9 +37,9 @@ const NotionPage: React.FC = () => {
       ) : (
         <ul>
           {data.map((item) => {
-            const title = item.properties?.이름?.title?.[0]?.text?.content || "제목 없음";
-            const date = item.properties?.생성일?.date?.start || "";
-            const url = item.url;
+            const title = item.properties?.Title?.title?.[0]?.text?.content || "제목 없음";
+            const date = item.properties?.Date?.date?.start || "";
+            const url = item.properties?.Link?.rich_text[0]?.plain_text || "";
 
             return (
               <li
