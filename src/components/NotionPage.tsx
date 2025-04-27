@@ -1,19 +1,5 @@
 import React, { useEffect, useState } from "react";
-
-type NotionPageType = {
-  id: string;
-  properties: {
-    Title: {
-      title: { text: { content: string } }[];
-    };
-    Date: {
-      date: { start: string };
-    };
-    Link: {
-      rich_text: {plain_text: string}[];
-    };
-  };
-};
+import { NotionPageType } from "@/lib/types";
 
 const NotionPage: React.FC = () => {
   const [data, setData] = useState<NotionPageType[]>([]);

@@ -11,3 +11,18 @@ export type Post = {
     dark = 'dark',
     light = 'light',
   }
+
+  export type NotionPageType = {
+    id: string;
+    properties: {
+      Title: {
+        title: { text: { content: string } }[];
+      };
+      Date: {
+        date: { start: string };
+      };
+      Link: {
+        rich_text: {plain_text: string}[];
+      };
+    };
+  };
