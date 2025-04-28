@@ -13,6 +13,7 @@ export default function Header() {
 
   return (
     <header className="header">
+
       <Link href="/" className="header__logo">
         JaeWoong.dev
       </Link>
@@ -21,9 +22,12 @@ export default function Header() {
         <Link href="/profile">프로필</Link>
         <Link href="/search">검색</Link>
         <button onClick={toggleDarkMode}>
-          {isDarkMode ? '화이트모드' : '다크모드'}
+          {isDarkMode ? '🌞' : '🌙'}
         </button>
+
       </nav>
+
     </header>
+
   );
 }
